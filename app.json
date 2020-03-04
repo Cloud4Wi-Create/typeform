@@ -1,7 +1,8 @@
 {
   "name": "Facebook Pixel App",
-  "description": "Example of Facebook Pixel app for Cloud4Wi Access Journey",
+  "description": "Example of Facebook Pixel app for Cloud4Wi Access Journey. Once deployed, follow the Readme instructions to finalize the setup.",
   "repository": "https://github.com/imuccini/fbpixel",
   "logo": "https://volareapp.com/apps/fbpixel/web/images/fbpixelicon.png",
-  "keywords": ["php"]
+  "keywords": ["php"],
+  "success_url": "https://cloud4wi.zendesk.com/hc/en-us/articles/360035706472-Facebook-Retargeting-Facebook-Pixel-",
 }
