@@ -8,7 +8,7 @@
   "env": {
     "FB_PIXEL_ID": {
       "description": "Your Facebook Pixel ID",
-      "value": "replace_here_with_your_pixel"
+      "value": ""
     }
   }
 }

@@ -4,7 +4,6 @@ require_once('env-config.php');
 
 if (getenv('FB_PIXEL_ID')) {
     $fb_pixel_id = getenv('FB_PIXEL_ID');
-    echo $url;
 } else {
   $fb_pixel_id ='2550495995042727';
 }
