@@ -4,5 +4,11 @@
   "repository": "https://github.com/imuccini/fbpixel",
   "logo": "https://volareapp.com/apps/fbpixel/web/images/fbpixelicon.png",
   "keywords": ["php"],
-  "success_url": "https://cloud4wi.zendesk.com/hc/en-us/articles/360035706472"
+  "success_url": "https://cloud4wi.zendesk.com/hc/en-us/articles/360035706472",
+  "env": {
+    "FB_PIXEL_ID": {
+      "description": "Your Facebook Pixel ID",
+      "value": "replace_here_with_your_pixel"
+    }
+  }
 }
