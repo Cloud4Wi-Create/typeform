@@ -6,6 +6,7 @@ if (getenv('FB_PIXEL_ID')) {
     $fb_pixel_id = getenv('FB_PIXEL_ID');
 } else {
   $fb_pixel_id ='2550495995042727';
+  echo $fb_pixel_id;
 }
 
 /**
@@ -61,9 +62,8 @@ $data = callApi();
 
 <script>
     console.log(<?php echo json_encode($data); ?>);
-    console.log(<?php echo $fb_pixel_id ?>);
+    console.log('<?php echo $fb_pixel_id ?>');
 </script>
-
 
 
 <!DOCTYPE html>
