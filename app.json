@@ -2,6 +2,6 @@
   "name": "Facebook Pixel App",
   "description": "Example of Facebook Pixel app for Cloud4Wi Access Journey",
   "repository": "https://github.com/imuccini/fbpixel",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "logo": "https://volareapp.com/apps/fbpixel/web/images/fbpixelicon.png",
   "keywords": ["php"]
 }
