@@ -1,0 +1,16 @@
+{
+    "require" : {
+      "php" : "^5.5 || ^7.0"
+    },
+    "license": [
+       "LGPL-2.1-only",
+       "GPL-3.0-or-later"
+    ],
+    "authors": [
+    {
+        "name": "Ivan Muccini",
+        "email": "imuccini@cloud4wi.com",
+        "role": "Product Manager"
+    }
+]
+}
