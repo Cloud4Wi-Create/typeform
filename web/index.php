@@ -61,7 +61,7 @@ $data = callApi();
 
 <script>
     console.log(<?php echo json_encode($data); ?>);
-    console.log(<?php echo $fb_pixel_id); ?>);
+    console.log(<?php echo $fb_pixel_id ?>);
 </script>
 
 
@@ -145,7 +145,7 @@ $data = callApi();
 
   </script>
   <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id="+"<?php echo $fb_pixel_id; ?>"+"&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id="+"<?php echo $fb_pixel_id ?>"+"&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Facebook Pixel Code -->
 
