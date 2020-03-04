@@ -1,0 +1,159 @@
+<?php
+
+require_once('env-config.php');
+
+/**
+ * @description: This function will not take any parameters,
+ * it will just call the C4W API and return the data.  If the
+ * SK is not set in the URL or if the API call is not a successful one,
+ * then it will return a false boolean. Otherwise it will return the object
+ *
+ * @return Object | Boolean;
+ */
+
+function callApi() {
+    $sk = $_GET['sk'];
+
+    // Check to see if any of the places where SK is set exists
+    if(isset($sk) && !empty($sk)) {
+
+        // Concatenate URL
+        $url = constant('C4W_ENV_CONTROLPANEL_URL') . constant('C4W_ENV_MYAPPS_GET_SK_URL') . $sk; // https://volare.cloud4wi.com/controlpanel/1.0/bridge/sessions
+
+        // Barebones call to the API using PHP curl
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $url
+        ));
+        $result = curl_exec($curl);
+        $session = json_decode($result, true);
+
+
+        // Create customer variable
+        $c4w = array();
+        if(isset($session['data']) && !empty($session['data'])) {
+            $c4w = $session['data'];
+        }
+
+        // Return false if status of API call is not success
+        if($session['status'] == 'success') {
+            return $c4w;
+        }
+    }
+
+    return false;
+}
+
+?>
+
+<?php
+
+$data = callApi();
+
+?>
+
+<script>
+    console.log(<?php echo json_encode($data); ?>);
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connecting</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://c4wstatic.cloud4wi.com/css/bootstrap/bootstrap.min.css">
+
+</head>
+<body>
+
+  <div class="showbox">
+  <div class="loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
+
+  <script src="https://splashportal.cloud4wi.com/myapps/v1/myapps-sdk.js"></script>
+
+  <script>
+      var config = <?php echo json_encode($data); ?>;
+
+      config = typeof(config) === 'string' ? JSON.parse(config) : config;
+
+      var firstname, lastname, email, gender, phone, storename;
+
+          console.log('FirstName:'+config.customer.first_name);
+          console.log('LastName:'+config.customer.last_name);
+          console.log('Email:'+config.customer.email);
+          console.log('Gender:'+config.customer.gender);
+          console.log('Phone:'+config.customer.phone);
+          console.log('Storename:'+config.wifiarea.name);
+
+      firstname = config.customer.first_name;
+      customerid = config.customer.id;
+      lastname = config.customer.last_name;
+      email = config.customer.email;
+      gender = config.customer.gender;
+      phone = config.customer.phone;
+      storename = config.wifiarea.name;
+
+  </script>
+
+
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2550495995042727', {
+      em: email,
+      external_id:customerid
+      em: email,  // Values will be hashed
+      fn: firstname,                // automatically by the pixel
+      ln: lastname,
+      ge: gender,
+      ph: phone,
+                // Values will be hashed
+                // using SHA-256
+    });
+    fbq('track', 'StoreVisit',
+      // begin parameter object data
+      {
+        store_name: storename  // custom property
+      }
+      // end parameter object data
+    );
+
+
+
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2550495995042727&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+
+
+<!-- jQuery -->
+<script src="https://splashportal.cloud4wi.com/js/jquery.min.js"></script>
+
+
+<script>
+
+window.setTimeout(function() {
+    MYAPPS.goNext();
+}, 200);
+</script>
+
+
+</body>
+</html
