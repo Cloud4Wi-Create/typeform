@@ -102,25 +102,25 @@ $data = callApi();
           console.log('Phone:'+config.customer.phone);
           console.log('Storename:'+config.wifiarea.name);
 
-          if(config.customer.first_name value !== '' || config.customer.first_name !== null ) {
+          if(config.customer.first_name !== '' || config.customer.first_name !== null ) {
             firstname = config.customer.first_name;
           }
-          if(config.customer.id value !== '' || config.customer.id !== null ) {
+          if(config.customer.id !== '' || config.customer.id !== null ) {
             customerid = config.customer.id;
           }
-          if(config.customer.last_name value !== '' || config.customer.last_name !== null ) {
+          if(config.customer.last_name !== '' || config.customer.last_name !== null ) {
             lastname = config.customer.last_name;
           }
-          if(config.customer.email value !== '' || config.customer.email !== null ) {
+          if(config.customer.email !== '' || config.customer.email !== null ) {
             email = config.customer.email;
           }
-          if(config.customer.gender value !== '' || config.customer.gender !== null ) {
+          if(config.customer.gender !== '' || config.customer.gender !== null ) {
             gender = config.customer.gender;
           }
-          if(config.customer.phone value !== '' || config.customer.phone !== null ) {
+          if(config.customer.phone !== '' || config.customer.phone !== null ) {
             phone = config.customer.phone;
           }
-          if(config.wifiarea.name value !== '' || config.wifiarea.name !== null ) {
+          if(config.wifiarea.name !== '' || config.wifiarea.name !== null ) {
             storename = config.wifiarea.name;
           }
 
