@@ -139,33 +139,33 @@ $data = callApi();
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    if (email !== null) {
-      fbq('init', '<?php echo $fb_pixel_id ?>', {
-        em: email
-      });
-    }
     if (customerid !== null ) {
       fbq('init', '<?php echo $fb_pixel_id ?>', {
         external_id:customerid
       });
     }
+    if (email !== null) {
+      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
+        em: email
+      });
+    }
     if (firstname !== null) {
-      fbq('init', '<?php echo $fb_pixel_id ?>', {
+      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
         fn: firstname
       });
     }
     if (lastname !== null) {
-      fbq('init', '<?php echo $fb_pixel_id ?>', {
+      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
         ln: lastname
       });
     }
     if (gender !== null) {
-      fbq('init', '<?php echo $fb_pixel_id ?>', {
+      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
         ge: gender
       });
     }
     if (phone !== null) {
-      fbq('init', '<?php echo $fb_pixel_id ?>', {
+      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
         ph: phone
       });
     };
