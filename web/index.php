@@ -139,28 +139,6 @@ $data = callApi();
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    var params = [];
-
-    if (customerid !== null ) {
-
-    }
-    if (email !== null) {
-
-    }
-    if (firstname !== null) {
-
-    }
-    if (lastname !== null) {
-
-    }
-    if (gender !== null) {
-
-    }
-    if (phone !== null) {
-
-    };
-
-
     fbq('init', '<?php echo $fb_pixel_id ?>', {
         uid:customerid,
         external_id:customerid,
