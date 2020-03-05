@@ -138,16 +138,47 @@ $data = callApi();
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '<?php echo $fb_pixel_id ?>', {
-      em: email,
-      external_id:customerid,
-      fn: firstname,                // automatically by the pixel
-      ln: lastname,
-      ge: gender,
-      ph: phone,
+    if (email !== null) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        em: email
+      });
+    }
+    if (customerid !== null ) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        external_id:customerid
+      });
+    }
+    if (firstname !== null) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        fn: firstname
+      });
+    }
+    if (lastname !== null) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        ln: lastname
+      });
+    }
+    if (gender !== null) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        ge: gender
+      });
+    }
+    if (phone !== null) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        ph: phone
+      });
+    };
+
+    //fbq('init', '<?php echo $fb_pixel_id ?>', {
+  //    em: email,
+    //  external_id:customerid,
+  //    fn: firstname,                // automatically by the pixel
+  //    ln: lastname,
+  //    ge: gender,
+  //    ph: phone,
                 // Values will be hashed
                 // using SHA-256
-    });
+//  });
     fbq('track', 'StoreVisit',
       // begin parameter object data
       {
