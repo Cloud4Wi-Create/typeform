@@ -93,7 +93,7 @@ $data = callApi();
 
       config = typeof(config) === 'string' ? JSON.parse(config) : config;
 
-      var firstname='', lastname='', email='', gender='', phone='', storename='';
+      var firstname = customerid = lastname = email = gender = phone = storename = '';
 
           console.log('FirstName:'+config.customer.first_name);
           console.log('LastName:'+config.customer.last_name);
