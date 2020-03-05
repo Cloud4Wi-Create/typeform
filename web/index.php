@@ -93,7 +93,7 @@ $data = callApi();
 
       config = typeof(config) === 'string' ? JSON.parse(config) : config;
 
-      var firstname = customerid = lastname = email = gender = phone = storename = '';
+      var firstname = customerid = lastname = email = gender = phone = storename = null;
 
           console.log('FirstName:'+config.customer.first_name);
           console.log('LastName:'+config.customer.last_name);
@@ -137,16 +137,38 @@ $data = callApi();
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '<?php echo $fb_pixel_id ?>', {
-      em: email,
-      external_id:customerid,
-      fn: firstname,                // automatically by the pixel
-      ln: lastname,
-      ge: gender,
-      ph: phone,
-                // Values will be hashed
-                // using SHA-256
-    });
+
+    if (email) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        em: email
+      });
+    };
+    if (customerid) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        external_id:customerid
+      });
+    };
+    if (firstname) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        fn: firstname
+      });
+    };
+    if (lastname) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        ln: lastname
+      });
+    };
+    if (gender) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        ge: gender
+      });
+    };
+    if (phone) {
+      fbq('init', '<?php echo $fb_pixel_id ?>', {
+        ph: phone
+      });
+    };
+
     fbq('track', 'StoreVisit',
       // begin parameter object data
       {
