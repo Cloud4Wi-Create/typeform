@@ -124,8 +124,7 @@ $data = callApi();
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '<?php echo $fb_pixel_id ?>', {
       em: email,
-      external_id:customerid
-      em: email,  // Values will be hashed
+      external_id:customerid,
       fn: firstname,                // automatically by the pixel
       ln: lastname,
       ge: gender,
