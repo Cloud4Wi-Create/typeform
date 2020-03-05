@@ -93,7 +93,7 @@ $data = callApi();
 
       config = typeof(config) === 'string' ? JSON.parse(config) : config;
 
-      var firstname, lastname, email, gender, phone, storename;
+      var firstname='', lastname='', email='', gender='', phone='', storename='';
 
           console.log('FirstName:'+config.customer.first_name);
           console.log('LastName:'+config.customer.last_name);
@@ -102,13 +102,28 @@ $data = callApi();
           console.log('Phone:'+config.customer.phone);
           console.log('Storename:'+config.wifiarea.name);
 
-      firstname = config.customer.first_name;
-      customerid = config.customer.id;
-      lastname = config.customer.last_name;
-      email = config.customer.email;
-      gender = config.customer.gender;
-      phone = config.customer.phone;
-      storename = config.wifiarea.name;
+          if(config.customer.first_name value !== '' || config.customer.first_name !== null ) {
+            firstname = config.customer.first_name;
+          }
+          if(config.customer.id value !== '' || config.customer.id !== null ) {
+            customerid = config.customer.id;
+          }
+          if(config.customer.last_name value !== '' || config.customer.last_name !== null ) {
+            lastname = config.customer.last_name;
+          }
+          if(config.customer.email value !== '' || config.customer.email !== null ) {
+            email = config.customer.email;
+          }
+          if(config.customer.gender value !== '' || config.customer.gender !== null ) {
+            gender = config.customer.gender;
+          }
+          if(config.customer.phone value !== '' || config.customer.phone !== null ) {
+            phone = config.customer.phone;
+          }
+          if(config.wifiarea.name value !== '' || config.wifiarea.name !== null ) {
+            storename = config.wifiarea.name;
+          }
+
 
   </script>
 
