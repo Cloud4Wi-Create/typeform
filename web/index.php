@@ -154,7 +154,6 @@ $data = callApi();
     });
 
     fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-      {
         $gender: gender.toLowerCase()
       }
     );
