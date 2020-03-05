@@ -103,26 +103,26 @@ $data = callApi();
           console.log('Storename:'+config.wifiarea.name);
 
           if(config.customer.first_name !== "" && config.customer.first_name !== null ) {
-            firstname = config.customer.first_name;
+            firstname = config.customer.first_name.toLowerCase();
           }
           if(config.customer.id !== "" && config.customer.id !== null ) {
             customerid = config.customer.id;
           }
           if(config.customer.last_name !== "" && config.customer.last_name !== null ) {
-            lastname = config.customer.last_name;
+            lastname = config.customer.last_name.toLowerCase();
           }
 
           if(config.customer.email !== "" && config.customer.email !== null ) {
-            email = config.customer.email;
+            email = config.customer.email.toLowerCase();
           }
           if(config.customer.gender !== "" && config.customer.gender !== null ) {
-            gender = config.customer.gender;
+            gender = config.customer.gender.toLowerCase();
           }
           if(config.customer.phone !== "" && config.customer.phone !== null ) {
-            phone = config.customer.phone;
+            phone = config.customer.phone.slice(1);
           }
           if(config.wifiarea.name !== "" && config.wifiarea.name !== null ) {
-            storename = config.wifiarea.name;
+            storename = config.wifiarea.name.toLowerCase();
           }
 
 
@@ -139,47 +139,26 @@ $data = callApi();
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    if (customerid !== null ) {
-      fbq('init', '<?php echo $fb_pixel_id ?>', {
-        external_id:customerid
-      });
-    }
-    if (email !== null) {
-      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-        em: email
-      });
-    }
-    if (firstname !== null) {
-      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-        fn: firstname
-      });
-    }
-    if (lastname !== null) {
-      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-        ln: lastname
-      });
-    }
-    if (gender !== null) {
-      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-        ge: gender
-      });
-    }
-    if (phone !== null) {
-      fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-        ph: phone
-      });
-    };
 
-    //fbq('init', '<?php echo $fb_pixel_id ?>', {
-  //    em: email,
-    //  external_id:customerid,
-  //    fn: firstname,                // automatically by the pixel
-  //    ln: lastname,
-  //    ge: gender,
-  //    ph: phone,
-                // Values will be hashed
-                // using SHA-256
-//  });
+
+    fbq('init', '<?php echo $fb_pixel_id ?>', {
+        uid:customerid,
+        external_id:customerid,
+        em: email,
+        fn: firstname,
+        ln: lastname,
+        ge: gender,
+        ph: phone,
+        // Values will be hashed
+        // using SHA-256
+    });
+
+    fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
+      {
+        $gender: gender.toLowerCase()
+      }
+    );
+
     fbq('track', 'StoreVisit',
       // begin parameter object data
       {
