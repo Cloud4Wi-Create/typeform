@@ -148,9 +148,9 @@ $data = callApi();
             console.log('Email OK:'+email);
           }
 
-          if(config.customer.marketing !== "" && config.customer.marketing !== null ) {
-            marketing = config.customer.marketing.toLowerCase();
-          }
+          //if(config.customer.marketing !== "" && config.customer.marketing !== null ) {
+          //  marketing = config.customer.marketing.toLowerCase();
+          //}
 
           if(config.customer.gender !== "" && config.customer.gender !== null ) {
             gender = config.customer.gender.toLowerCase();
