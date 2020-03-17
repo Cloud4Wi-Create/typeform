@@ -122,7 +122,7 @@ $data = callApi();
 
       config = typeof(config) === 'string' ? JSON.parse(config) : config;
 
-      var firstname = customerid = lastname = email = gender = phone = storename = null;
+      var firstname = customerid = lastname = email = gender = phone = storename = marketing = null;
 
           console.log('FirstName:'+config.customer.first_name);
           console.log('LastName:'+config.customer.last_name);
@@ -145,6 +145,11 @@ $data = callApi();
             email = config.customer.email.toLowerCase();
             console.log('Email:'+email);
           }
+
+          if(config.customer.marketing !== "" && config.customer.marketing !== null ) {
+            marketing = config.customer.marketing.toLowerCase();
+          }
+
           if(config.customer.gender !== "" && config.customer.gender !== null ) {
             gender = config.customer.gender.toLowerCase();
           }
@@ -161,7 +166,7 @@ $data = callApi();
   <script type="text/javascript">
 
   var surveyid='<?php echo $tp_form_id ?>';
-  var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid;
+  var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid+"&phone="+phone+"&marketing="+marketing+"&gender="+gender;
   console.log(surveyurl);
     window.addEventListener("DOMContentLoaded", function() {
       var el = document.getElementById("my-embedded-typeform");
