@@ -1,7 +1,7 @@
 {
   "name": "Typeform App",
   "description": "Example of Typeform app for Cloud4Wi Access Journey. Once deployed, follow the Readme instructions to finalize the setup.",
-  "repository": "https://github.com/Cloud4Wi-Create/typeform,
+  "repository": "https://github.com/Cloud4Wi-Create/typeform",
   "logo": "https://volareapp.com/apps/typeformapp/web/images/icon.png",
   "keywords": ["php"],
   "success_url": "https://cloud4wi.zendesk.com/hc/en-us/articles/360040644532",
