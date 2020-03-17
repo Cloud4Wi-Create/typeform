@@ -126,24 +126,26 @@ $data = callApi();
 
           console.log('FirstName:'+config.customer.first_name);
           console.log('LastName:'+config.customer.last_name);
-
           console.log('Gender:'+config.customer.gender);
           console.log('Phone:'+config.customer.phone);
           console.log('Storename:'+config.wifiarea.name);
 
           if(config.customer.first_name !== "" && config.customer.first_name !== null ) {
             firstname = config.customer.first_name.toLowerCase();
+            console.log('FirstName OK:'+firstname);
           }
           if(config.customer.id !== "" && config.customer.id !== null ) {
             customerid = config.customer.id;
+            console.log('Customer Id OK:'+customerid);
           }
           if(config.customer.last_name !== "" && config.customer.last_name !== null ) {
             lastname = config.customer.last_name.toLowerCase();
+            console.log('LastName OK:'+lastname);
           }
 
           if(config.customer.email !== "" && config.customer.email !== null ) {
             email = config.customer.email.toLowerCase();
-            console.log('Email:'+email);
+            console.log('Email OK:'+email);
           }
 
           if(config.customer.marketing !== "" && config.customer.marketing !== null ) {
@@ -152,12 +154,15 @@ $data = callApi();
 
           if(config.customer.gender !== "" && config.customer.gender !== null ) {
             gender = config.customer.gender.toLowerCase();
+            console.log('Gender OK:'+gender);
           }
           if(config.customer.phone !== "" && config.customer.phone !== null ) {
             phone = config.customer.phone.slice(1);
+            console.log('phone OK:'+phone);
           }
           if(config.wifiarea.name !== "" && config.wifiarea.name !== null ) {
             storename = config.wifiarea.name.toLowerCase();
+            console.log('storename OK:'+storename);
           }
 
   </script>
