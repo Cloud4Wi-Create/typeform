@@ -2,12 +2,12 @@
 
 require_once('env-config.php');
 
-if (getenv('FB_PIXEL_ID')) {
-    $fb_pixel_id = getenv('FB_PIXEL_ID');
+if (getenv('TYPEFORM_FORM_ID')) {
+    $tp_form_id = getenv('TYPEFORM_FORM_ID');
 } else {
-  $fb_pixel_id ='2550495995042727';
-  echo $fb_pixel_id;
+  $tp_form_id ='2550495995042727';
 }
+
 
 /**
  * @description: This function will not take any parameters,
@@ -75,18 +75,47 @@ $data = callApi();
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://c4wstatic.cloud4wi.com/css/bootstrap/bootstrap.min.css">
 
+
+    <style type="text/css">
+
+
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    h1 {
+      font-size: 50px;
+      text-align: center;
+    }
+
+    .container {
+      margin: 0 auto;
+      width: 100%;
+      position: absolute;
+      top:0px;
+      bottom:0px;
+      left:0px;
+      right:0px;
+    }
+
+      </style>
+
 </head>
 <body>
 
-  <div class="showbox">
-  <div class="loader">
-    <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-    </svg>
+  <div class="container">
+    <!-- This is the DOM element that will contain your embedded typeform -->
+    <div id="my-embedded-typeform"
+         style="width: 100%; height: 100%;"></div>
   </div>
-</div>
+
 
   <script src="https://splashportal.cloud4wi.com/myapps/v1/myapps-sdk.js"></script>
+  <!-- jQuery -->
+  <script src="https://splashportal.cloud4wi.com/js/jquery.min.js"></script>
+  <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
+
+
 
   <script>
       var config = <?php echo json_encode($data); ?>;
@@ -97,7 +126,7 @@ $data = callApi();
 
           console.log('FirstName:'+config.customer.first_name);
           console.log('LastName:'+config.customer.last_name);
-          console.log('Email:'+config.customer.email);
+
           console.log('Gender:'+config.customer.gender);
           console.log('Phone:'+config.customer.phone);
           console.log('Storename:'+config.wifiarea.name);
@@ -114,6 +143,7 @@ $data = callApi();
 
           if(config.customer.email !== "" && config.customer.email !== null ) {
             email = config.customer.email.toLowerCase();
+            console.log('Email:'+email);
           }
           if(config.customer.gender !== "" && config.customer.gender !== null ) {
             gender = config.customer.gender.toLowerCase();
@@ -125,65 +155,29 @@ $data = callApi();
             storename = config.wifiarea.name.toLowerCase();
           }
 
-
   </script>
 
 
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+  <script type="text/javascript">
 
-    fbq('init', '<?php echo $fb_pixel_id ?>', {
-        uid:customerid,
-        external_id:customerid,
-        em: email,
-        fn: firstname,
-        ln: lastname,
-        ge: gender,
-        ph: phone,
-        // Values will be hashed
-        // using SHA-256
+  var surveyid='<?php echo $tp_form_id ?>';
+  var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid;
+  console.log(surveyurl);
+    window.addEventListener("DOMContentLoaded", function() {
+      var el = document.getElementById("my-embedded-typeform");
+
+      // When instantiating a widget embed, you must provide the DOM element
+      // that will contain your typeform, the URL of your typeform, and your
+      // desired embed settings
+      window.typeformEmbed.makeWidget(el, surveyurl, {
+        hideFooter: true,
+        hideHeaders: true,
+        onSubmit: function () {
+          MYAPPS.goNext();
+        }
+      });
     });
-
-    fbq('setUserProperties', '<?php echo $fb_pixel_id ?>', {
-        $gender: gender.toLowerCase()
-      }
-    );
-
-    fbq('track', 'StoreVisit',
-      // begin parameter object data
-      {
-        store_name: storename  // custom property
-      }
-      // end parameter object data
-    );
-
-
-
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=<?php echo $fb_pixel_id ?>&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Facebook Pixel Code -->
-
-
-<!-- jQuery -->
-<script src="https://splashportal.cloud4wi.com/js/jquery.min.js"></script>
-
-
-<script>
-
-window.setTimeout(function() {
-    MYAPPS.goNext();
-}, 200);
-</script>
-
 
 </body>
-</html
+</html>

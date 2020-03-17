@@ -1,13 +1,13 @@
 {
-  "name": "Facebook Pixel App",
-  "description": "Example of Facebook Pixel app for Cloud4Wi Access Journey. Once deployed, follow the Readme instructions to finalize the setup.",
+  "name": "Typeform App",
+  "description": "Example of Typeform app for Cloud4Wi Access Journey. Once deployed, follow the Readme instructions to finalize the setup.",
   "repository": "https://github.com/imuccini/fbpixel",
-  "logo": "https://volareapp.com/apps/fbpixel/web/images/fbpixelicon.png",
+  "logo": "https://volareapp.com/apps/fbpixel/web/images/icon.png",
   "keywords": ["php"],
   "success_url": "https://cloud4wi.zendesk.com/hc/en-us/articles/360035706472",
   "env": {
-    "FB_PIXEL_ID": {
-      "description": "Your Facebook Pixel ID",
+    "TYPEFORM_FORM_ID": {
+      "description": "Your Typeform Survey ID",
       "value": ""
     }
   }
