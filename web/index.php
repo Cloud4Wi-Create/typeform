@@ -11,27 +11,10 @@ if (getenv('TYPEFORM_FORM_ID')) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Connecting</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://c4wstatic.cloud4wi.com/css/bootstrap/bootstrap.min.css">
-
-    <script>
-        console.log('<?php echo $fb_pixel_id ?>');
-    </script>
-
-    <style type="text/css">
-
-    body {
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-
-    h1 {
-      font-size: 50px;
-      text-align: center;
-    }
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connecting...</title>
+  <style type="text/css">
     .container {
       margin: 0 auto;
       width: 100%;
@@ -41,8 +24,7 @@ if (getenv('TYPEFORM_FORM_ID')) {
       left:0px;
       right:0px;
     }
-
-    </style>
+  </style>
 
 </head>
 <body>
@@ -53,10 +35,12 @@ if (getenv('TYPEFORM_FORM_ID')) {
          style="width: 100%; height: 100%;"></div>
   </div>
 
-
   <script src="https://splashportal.cloud4wi.com/myapps/v1/myapps-sdk.js"></script>
+
   <!-- jQuery -->
-  <script src="https://splashportal.cloud4wi.com/js/jquery.min.js"></script>
+  <!-- <script src="https://splashportal.cloud4wi.com/js/jquery.min.js"></script>-->
+
+  <!-- TypeForm -->
   <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
 
   <script>
@@ -64,8 +48,7 @@ if (getenv('TYPEFORM_FORM_ID')) {
     var firstname = customerid = lastname = email = gender = phone = storename = marketing = null;
     var printSession = function(sessionData) {
 
-      let str = JSON.stringify(sessionData, null, 4);
-      console.log("session data ="+str);
+      /*Initialized customer fields */
 
       if(sessionData.data.customer.first_name !== "" && sessionData.data.customer.first_name !== null ) {
         firstname = sessionData.data.customer.first_name.toLowerCase();
@@ -100,15 +83,13 @@ if (getenv('TYPEFORM_FORM_ID')) {
         console.log('Marketing Opt-in:'+marketing);
       }
 
+      /*Create the Form URL with hidden Fields */
       var surveyid='<?php echo $tp_form_id ?>';
       var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid+"&phone="+phone+"&marketing="+marketing+"&gender="+gender;
-      console.log(surveyurl);
 
+
+      /*Inject Typeform form in the page */
       var el = document.getElementById("my-embedded-typeform");
-
-      // When instantiating a widget embed, you must provide the DOM element
-      // that will contain your typeform, the URL of your typeform, and your
-      // desired embed settings
       window.typeformEmbed.makeWidget(el, surveyurl, {
         hideFooter: true,
         hideHeaders: true,
