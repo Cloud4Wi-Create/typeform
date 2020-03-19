@@ -1,70 +1,12 @@
 <?php
 
-require_once('env-config.php');
-
 if (getenv('TYPEFORM_FORM_ID')) {
     $tp_form_id = getenv('TYPEFORM_FORM_ID');
 } else {
   $tp_form_id ='a96bhF';
 }
 
-
-/**
- * @description: This function will not take any parameters,
- * it will just call the C4W API and return the data.  If the
- * SK is not set in the URL or if the API call is not a successful one,
- * then it will return a false boolean. Otherwise it will return the object
- *
- * @return Object | Boolean;
- */
-
-function callApi() {
-    $sk = $_GET['sk'];
-
-    // Check to see if any of the places where SK is set exists
-    if(isset($sk) && !empty($sk)) {
-
-        // Concatenate URL
-        $url = constant('C4W_ENV_CONTROLPANEL_URL') . constant('C4W_ENV_MYAPPS_GET_SK_URL') . $sk; // https://volare.cloud4wi.com/controlpanel/1.0/bridge/sessions
-
-        // Barebones call to the API using PHP curl
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $url
-        ));
-        $result = curl_exec($curl);
-        $session = json_decode($result, true);
-
-
-        // Create customer variable
-        $c4w = array();
-        if(isset($session['data']) && !empty($session['data'])) {
-            $c4w = $session['data'];
-        }
-
-        // Return false if status of API call is not success
-        if($session['status'] == 'success') {
-            return $c4w;
-        }
-    }
-
-    return false;
-}
-
 ?>
-
-<?php
-
-$data = callApi();
-
-?>
-
-<script>
-    console.log(<?php echo json_encode($data); ?>);
-    console.log('<?php echo $fb_pixel_id ?>');
-</script>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,9 +17,11 @@ $data = callApi();
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://c4wstatic.cloud4wi.com/css/bootstrap/bootstrap.min.css">
 
+    <script>
+        console.log('<?php echo $fb_pixel_id ?>');
+    </script>
 
     <style type="text/css">
-
 
     body {
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -98,7 +42,7 @@ $data = callApi();
       right:0px;
     }
 
-      </style>
+    </style>
 
 </head>
 <body>
@@ -115,65 +59,51 @@ $data = callApi();
   <script src="https://splashportal.cloud4wi.com/js/jquery.min.js"></script>
   <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
 
-
-
   <script>
-      var config = <?php echo json_encode($data); ?>;
 
-      config = typeof(config) === 'string' ? JSON.parse(config) : config;
+    var firstname = customerid = lastname = email = gender = phone = storename = marketing = null;
+    var printSession = function(sessionData) {
 
-      var firstname = customerid = lastname = email = gender = phone = storename = marketing = null;
+      let str = JSON.stringify(sessionData, null, 4);
+      console.log("session data ="+str);
 
-          console.log('FirstName:'+config.customer.first_name);
-          console.log('LastName:'+config.customer.last_name);
-          console.log('Gender:'+config.customer.gender);
-          console.log('Phone:'+config.customer.phone);
-          console.log('Storename:'+config.wifiarea.name);
+      if(sessionData.data.customer.first_name !== "" && sessionData.data.customer.first_name !== null ) {
+        firstname = sessionData.data.customer.first_name.toLowerCase();
+        console.log('FirstName:'+firstname);
+      }
+      if(sessionData.data.customer.id !== "" && sessionData.data.customer.id !== null ) {
+        customerid = sessionData.data.customer.id;
+        console.log('CustomerId:'+customerid);
+      }
+      if(sessionData.data.customer.last_name !== "" && sessionData.data.customer.last_name !== null ) {
+        lastname = sessionData.data.customer.last_name.toLowerCase();
+        console.log('Laste Name:'+lastname);
+      }
+      if(sessionData.data.customer.email !== "" && sessionData.data.customer.email !== null ) {
+        email = sessionData.data.customer.email.toLowerCase();
+        console.log('Email:'+email);
+      }
+      if(sessionData.data.customer.gender !== "" && sessionData.data.customer.gender !== null ) {
+        gender = sessionData.data.customer.gender.toLowerCase();
+        console.log('gender:'+gender);
+      }
+      if(sessionData.data.customer.phone !== "" && sessionData.data.customer.phone !== null ) {
+        phone = sessionData.data.customer.phone;
+        console.log('phone:'+phone);
+      }
+      if(sessionData.data.wifiarea.name !== "" && sessionData.data.wifiarea.name !== null ) {
+        storename = sessionData.data.wifiarea.name.toLowerCase();
+        console.log('storename:'+storename);
+      }
+      if(sessionData.data.customer.mktgCommunications !== "" && sessionData.data.customer.mktgCommunications !== null ) {
+        marketing = sessionData.data.customer.mktgCommunications;
+        console.log('Marketing Opt-in:'+marketing);
+      }
 
-          if(config.customer.first_name !== "" && config.customer.first_name !== null ) {
-            firstname = config.customer.first_name.toLowerCase();
-            console.log('FirstName OK:'+firstname);
-          }
-          if(config.customer.id !== "" && config.customer.id !== null ) {
-            customerid = config.customer.id;
-            console.log('Customer Id OK:'+customerid);
-          }
-          if(config.customer.last_name !== "" && config.customer.last_name !== null ) {
-            lastname = config.customer.last_name.toLowerCase();
-            console.log('LastName OK:'+lastname);
-          }
+      var surveyid='<?php echo $tp_form_id ?>';
+      var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid+"&phone="+phone+"&marketing="+marketing+"&gender="+gender;
+      console.log(surveyurl);
 
-          if(config.customer.email !== "" && config.customer.email !== null ) {
-            email = config.customer.email.toLowerCase();
-            console.log('Email OK:'+email);
-          }
-
-          //if(config.customer.marketing !== "" && config.customer.marketing !== null ) {
-          //  marketing = config.customer.marketing.toLowerCase();
-          //}
-
-          if(config.customer.gender !== "" && config.customer.gender !== null ) {
-            gender = config.customer.gender.toLowerCase();
-            console.log('Gender OK:'+gender);
-          }
-          if(config.customer.phone !== "" && config.customer.phone !== null ) {
-            phone = config.customer.phone.slice(1);
-            console.log('phone OK:'+phone);
-          }
-          if(config.wifiarea.name !== "" && config.wifiarea.name !== null ) {
-            storename = config.wifiarea.name.toLowerCase();
-            console.log('storename OK:'+storename);
-          }
-
-  </script>
-
-
-  <script type="text/javascript">
-
-  var surveyid='<?php echo $tp_form_id ?>';
-  var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid+"&phone="+phone+"&marketing="+marketing+"&gender="+gender;
-  console.log(surveyurl);
-    window.addEventListener("DOMContentLoaded", function() {
       var el = document.getElementById("my-embedded-typeform");
 
       // When instantiating a widget embed, you must provide the DOM element
@@ -186,8 +116,13 @@ $data = callApi();
           MYAPPS.goNext();
         }
       });
-    });
+
+    }
+
+  MYAPPS.session(printSession);
+
   </script>
+
 
 </body>
 </html>
