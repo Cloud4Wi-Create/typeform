@@ -85,7 +85,7 @@ if (getenv('TYPEFORM_FORM_ID')) {
 
       /*Create the Form URL with hidden Fields */
       var surveyid='<?php echo $tp_form_id ?>';
-      var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid+"&phone="+phone+"&marketing="+marketing+"&gender="+gender;
+      var surveyurl="https://cloud4wi.typeform.com/to/"+surveyid+"?email="+email+"&customer_id="+customerid+"&phone="+phone+"&marketing="+marketing+"&gender="+gender+"&typeform-welcome=0";
 
 
       /*Inject Typeform form in the page */
